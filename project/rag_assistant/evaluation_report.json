@@ -1,0 +1,279 @@
+{
+  "metrics": {
+    "evaluation_cases": 14,
+    "answerable_cases": 10,
+    "unsupported_cases": 4,
+    "source_recall_at_5": 1.0,
+    "source_mrr": 0.9333,
+    "answerability_accuracy": 1.0,
+    "citation_validity": 1.0,
+    "evidence_anchor_coverage": 0.9474,
+    "note": "Small hand-labelled POC set; metrics are directional, not a production benchmark. LLM answer factuality is not measured because this run uses deterministic local evaluation."
+  },
+  "cases": [
+    {
+      "id": "M01",
+      "question": "How is the index date selected?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "methodology.md",
+        "methodology.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "methodology.md#p5",
+        "methodology.md#p4",
+        "methodology.md#p6"
+      ]
+    },
+    {
+      "id": "M02",
+      "question": "Are rejected pharmacy claims included?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "methodology.md#p2",
+        "methodology.md#p3",
+        "analysis_results.md#p7"
+      ]
+    },
+    {
+      "id": "M03",
+      "question": "Is a refill gap of exactly 60 days allowed?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md",
+        "analysis_results.md",
+        "analysis_results.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "methodology.md#p6",
+        "analysis_results.md#p5",
+        "methodology.md#p2"
+      ]
+    },
+    {
+      "id": "M04",
+      "question": "When does discontinuation occur after the allowed refill gap?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "methodology.md#p6",
+        "methodology.md#p7",
+        "analysis_results.md#p5"
+      ]
+    },
+    {
+      "id": "M05",
+      "question": "How is early refill stockpiling handled?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "methodology.md#p6",
+        "methodology.md#p8",
+        "analysis_results.md#p5"
+      ]
+    },
+    {
+      "id": "M06",
+      "question": "What was six-month persistence in the synthetic baseline?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "analysis_results.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "methodology.md#p5",
+        "methodology.md#p2",
+        "analysis_results.md#p4"
+      ]
+    },
+    {
+      "id": "M07",
+      "question": "What is the confidence interval for six-month persistence?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "analysis_results.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "analysis_results.md#p2",
+        "methodology.md#p5",
+        "analysis_results.md#p4"
+      ]
+    },
+    {
+      "id": "M08",
+      "question": "Does the synthetic result validate the client's historical 68 percent?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "analysis_results.md#p7",
+        "methodology.md#p8",
+        "methodology.md#p6"
+      ]
+    },
+    {
+      "id": "M09",
+      "question": "How many patients were censored in survival analysis?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "analysis_results.md",
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "analysis_results.md#p4",
+        "analysis_results.md#p2",
+        "methodology.md#p7"
+      ]
+    },
+    {
+      "id": "M10",
+      "question": "What are the 30, 60 and 90 day sensitivity scenarios?",
+      "expected_answerable": true,
+      "predicted_answerable": true,
+      "retrieved_files": [
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": true,
+      "mode": "extractive_rag",
+      "citations": [
+        "analysis_results.md#p5",
+        "methodology.md#p6",
+        "methodology.md#p8"
+      ]
+    },
+    {
+      "id": "U01",
+      "question": "What dose should a patient take?",
+      "expected_answerable": false,
+      "predicted_answerable": false,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": null,
+      "mode": "safety_abstain",
+      "citations": []
+    },
+    {
+      "id": "U02",
+      "question": "What was the patient's blood pressure?",
+      "expected_answerable": false,
+      "predicted_answerable": false,
+      "retrieved_files": [
+        "methodology.md",
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": null,
+      "mode": "scope_abstain",
+      "citations": []
+    },
+    {
+      "id": "U03",
+      "question": "Which insurance provider has the best clinical outcomes?",
+      "expected_answerable": false,
+      "predicted_answerable": false,
+      "retrieved_files": [
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md",
+        "methodology.md",
+        "analysis_results.md"
+      ],
+      "expected_file_retrieved": null,
+      "mode": "scope_abstain",
+      "citations": []
+    },
+    {
+      "id": "U04",
+      "question": "What is the FDA-approved indication for this medication?",
+      "expected_answerable": false,
+      "predicted_answerable": false,
+      "retrieved_files": [
+        "analysis_results.md",
+        "methodology.md",
+        "analysis_results.md",
+        "methodology.md",
+        "methodology.md"
+      ],
+      "expected_file_retrieved": null,
+      "mode": "scope_abstain",
+      "citations": []
+    }
+  ]
+}

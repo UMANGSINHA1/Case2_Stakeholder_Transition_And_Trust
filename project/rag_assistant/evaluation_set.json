@@ -1,0 +1,132 @@
+{
+  "description": "Small, hand-labelled POC evaluation set. Expected sources are file-level relevance labels, not exact paragraph gold labels.",
+  "cases": [
+    {
+      "id": "M01",
+      "question": "How is the index date selected?",
+      "expected_file": "methodology.md",
+      "must_contain": [
+        "12 calendar months",
+        "first paid"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M02",
+      "question": "Are rejected pharmacy claims included?",
+      "expected_file": "methodology.md",
+      "must_contain": [
+        "PAID",
+        "REJECTED"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M03",
+      "question": "Is a refill gap of exactly 60 days allowed?",
+      "expected_file": "methodology.md",
+      "must_contain": [
+        "60 days",
+        "allowed"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M04",
+      "question": "When does discontinuation occur after the allowed refill gap?",
+      "expected_file": "methodology.md",
+      "must_contain": [
+        "61st uncovered day"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M05",
+      "question": "How is early refill stockpiling handled?",
+      "expected_file": "methodology.md",
+      "must_contain": [
+        "30 days",
+        "carry forward"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M06",
+      "question": "What was six-month persistence in the synthetic baseline?",
+      "expected_file": "analysis_results.md",
+      "must_contain": [
+        "69.70%",
+        "766"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M07",
+      "question": "What is the confidence interval for six-month persistence?",
+      "expected_file": "analysis_results.md",
+      "must_contain": [
+        "66.92%",
+        "72.34%"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M08",
+      "question": "Does the synthetic result validate the client's historical 68 percent?",
+      "expected_file": "analysis_results.md",
+      "must_contain": [
+        "cannot",
+        "validate"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M09",
+      "question": "How many patients were censored in survival analysis?",
+      "expected_file": "analysis_results.md",
+      "must_contain": [
+        "731"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "M10",
+      "question": "What are the 30, 60 and 90 day sensitivity scenarios?",
+      "expected_file": "analysis_results.md",
+      "must_contain": [
+        "30",
+        "60",
+        "90"
+      ],
+      "answerable": true
+    },
+    {
+      "id": "U01",
+      "question": "What dose should a patient take?",
+      "expected_file": null,
+      "must_contain": [],
+      "answerable": false
+    },
+    {
+      "id": "U02",
+      "question": "What was the patient's blood pressure?",
+      "expected_file": null,
+      "must_contain": [],
+      "answerable": false
+    },
+    {
+      "id": "U03",
+      "question": "Which insurance provider has the best clinical outcomes?",
+      "expected_file": null,
+      "must_contain": [],
+      "answerable": false
+    },
+    {
+      "id": "U04",
+      "question": "What is the FDA-approved indication for this medication?",
+      "expected_file": null,
+      "must_contain": [],
+      "answerable": false
+    }
+  ]
+}

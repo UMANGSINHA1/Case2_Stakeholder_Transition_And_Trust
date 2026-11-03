@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "Q01-01",
+    "question": "What data is synthetic and which medication identifier is analysed?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-02",
+    "question": "Are these real patient records or simulated claims?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-03",
+    "question": "Which product code is in scope for the analysis?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "test"
+  },
+  {
+    "id": "Q01-04",
+    "question": "Does the analysis include switching to another brand?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-05",
+    "question": "What is the data scope and target drug definition?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-06",
+    "question": "Are patient IDs and pharmacy transactions real?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "test"
+  },
+  {
+    "id": "Q01-07",
+    "question": "Which target brand is covered by this proof of concept?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-08",
+    "question": "Does the cohort include active ingredient or brand switches?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-09",
+    "question": "Clarify whether the dataset represents actual patients.",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "test"
+  },
+  {
+    "id": "Q01-10",
+    "question": "What medication identifier does the synthetic dataset use?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-11",
+    "question": "Is this a real-world evidence dataset?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "train"
+  },
+  {
+    "id": "Q01-12",
+    "question": "Are other brands counted as treatment continuation?",
+    "gold_source": "methodology.md#p2",
+    "family": 0,
+    "split": "test"
+  },
+  {
+    "id": "Q02-01",
+    "question": "Which pharmacy claim statuses count in the analysis?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-02",
+    "question": "Are rejected or reversed prescriptions included?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-03",
+    "question": "How are duplicate claim records handled?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "test"
+  },
+  {
+    "id": "Q02-04",
+    "question": "What is the rule for invalid days supply values?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-05",
+    "question": "Do multiple paid fills on one date get removed?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-06",
+    "question": "Explain pharmacy transaction cleaning and eligibility.",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "test"
+  },
+  {
+    "id": "Q02-07",
+    "question": "Are only successfully paid claims retained?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-08",
+    "question": "What happens to a claim with 400 days supply?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-09",
+    "question": "Which field is used as the deduplication key?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "test"
+  },
+  {
+    "id": "Q02-10",
+    "question": "Are reversed transactions counted as medication use?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-11",
+    "question": "How are same-day distinct paid transactions treated?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "train"
+  },
+  {
+    "id": "Q02-12",
+    "question": "What claim status is excluded from the cohort?",
+    "gold_source": "methodology.md#p3",
+    "family": 1,
+    "split": "test"
+  },
+  {
+    "id": "Q03-01",
+    "question": "How do you determine the index date for a patient?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-02",
+    "question": "What is the washout period before the first fill?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-03",
+    "question": "How much continuous insurance history is required before initiation?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "test"
+  },
+  {
+    "id": "Q03-04",
+    "question": "Can a patient with a paid target drug claim in the prior year qualify?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-05",
+    "question": "How is an observed new initiator identified?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-06",
+    "question": "What enrollment condition applies to the lookback window?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "test"
+  },
+  {
+    "id": "Q03-07",
+    "question": "Is the index date the first observed paid target medication fill?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-08",
+    "question": "How are calendar month anniversaries used in washout?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-09",
+    "question": "What prior medication history disqualifies a patient?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "test"
+  },
+  {
+    "id": "Q03-10",
+    "question": "How long must a patient be continuously insured before index?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-11",
+    "question": "Does the patient need a clean 12-month drug history?",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "train"
+  },
+  {
+    "id": "Q03-12",
+    "question": "Describe the new-user cohort entry rule.",
+    "gold_source": "methodology.md#p4",
+    "family": 2,
+    "split": "test"
+  },
+  {
+    "id": "Q04-01",
+    "question": "What enrollment is required for the original six month cohort?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-02",
+    "question": "How is six-month persistence assessed in the fixed cohort?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-03",
+    "question": "Does the original cohort require future insurance coverage?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "test"
+  },
+  {
+    "id": "Q04-04",
+    "question": "What is the persistence endpoint date?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-05",
+    "question": "Can a patient lost to follow-up before six months be counted persistent?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-06",
+    "question": "What does the 12-month lookforward rule mean?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "test"
+  },
+  {
+    "id": "Q04-07",
+    "question": "How is the fixed cohort denominator selected?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-08",
+    "question": "Is persistence checked on a calendar-month anniversary?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-09",
+    "question": "Does a discontinuation before the endpoint count as persistent?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "test"
+  },
+  {
+    "id": "Q04-10",
+    "question": "What future enrollment is needed after index?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-11",
+    "question": "Explain original cohort inclusion and six month endpoint.",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "train"
+  },
+  {
+    "id": "Q04-12",
+    "question": "What happens if coverage ends before the persistence endpoint?",
+    "gold_source": "methodology.md#p5",
+    "family": 3,
+    "split": "test"
+  },
+  {
+    "id": "Q05-01",
+    "question": "How are days supply and early refills accumulated?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-02",
+    "question": "Is exactly a 60-day refill gap allowed?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-03",
+    "question": "When is a patient considered discontinued after a gap?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "test"
+  },
+  {
+    "id": "Q05-04",
+    "question": "What is the stockpiling cap for early refills?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-05",
+    "question": "Does restarting after discontinuation restore the original episode?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-06",
+    "question": "How is the covered-through date calculated?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "test"
+  },
+  {
+    "id": "Q05-07",
+    "question": "Is a 61-day uncovered gap an event?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-08",
+    "question": "What is the event date after the allowed refill gap?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-09",
+    "question": "Can unused medication carry over to the next fill?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "test"
+  },
+  {
+    "id": "Q05-10",
+    "question": "What is the rule for overlapping days supply?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-11",
+    "question": "How many days of early refill stock can be carried forward?",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "train"
+  },
+  {
+    "id": "Q05-12",
+    "question": "Explain the refill gap and discontinuation definition.",
+    "gold_source": "methodology.md#p6",
+    "family": 4,
+    "split": "test"
+  },
+  {
+    "id": "Q06-01",
+    "question": "How is insurance loss handled in survival analysis?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-02",
+    "question": "What is the Kaplan Meier survival cohort eligibility rule?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-03",
+    "question": "Does survival analysis require 12 months of future enrollment?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "test"
+  },
+  {
+    "id": "Q06-04",
+    "question": "When is a patient censored due to insurance loss?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-05",
+    "question": "What is the administrative censoring date?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-06",
+    "question": "What assumption does the Kaplan Meier estimator make about censoring?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "test"
+  },
+  {
+    "id": "Q06-07",
+    "question": "How does the survival cohort differ from the fixed cohort?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-08",
+    "question": "Are patients censored on their last covered day?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-09",
+    "question": "Does loss of insurance count as a discontinuation event?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "test"
+  },
+  {
+    "id": "Q06-10",
+    "question": "What is the non-informative censoring assumption?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-11",
+    "question": "What future enrollment is needed for the survival cohort?",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "train"
+  },
+  {
+    "id": "Q06-12",
+    "question": "Explain the handling of insurance disenrollment.",
+    "gold_source": "methodology.md#p7",
+    "family": 5,
+    "split": "test"
+  },
+  {
+    "id": "Q07-01",
+    "question": "What was the six-month persistence estimate in the baseline?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-02",
+    "question": "How many patients persisted at six months?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-03",
+    "question": "What was the Wilson confidence interval for persistence?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "test"
+  },
+  {
+    "id": "Q07-04",
+    "question": "How large was the original fixed cohort?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-05",
+    "question": "What percentage of the cohort remained persistent at six months?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-06",
+    "question": "How many original cohort patients were included?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "test"
+  },
+  {
+    "id": "Q07-07",
+    "question": "What was the baseline persistence rate and its uncertainty?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-08",
+    "question": "What was the synthetic six-month result?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-09",
+    "question": "Give the six month persistence numerator and denominator.",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "test"
+  },
+  {
+    "id": "Q07-10",
+    "question": "What was the reported confidence range?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-11",
+    "question": "How many patients were not persistent by six months?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "train"
+  },
+  {
+    "id": "Q07-12",
+    "question": "What is the main baseline result?",
+    "gold_source": "analysis_results.md#p2",
+    "family": 6,
+    "split": "test"
+  },
+  {
+    "id": "Q08-01",
+    "question": "How many candidate patients were screened?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-02",
+    "question": "How many patients passed the lookback eligibility criteria?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-03",
+    "question": "What were the original cohort exclusion counts?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "test"
+  },
+  {
+    "id": "Q08-04",
+    "question": "How many people failed the 12-month lookforward rule?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-05",
+    "question": "How many had prior target drug use in washout?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-06",
+    "question": "What was the cohort construction funnel?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "test"
+  },
+  {
+    "id": "Q08-07",
+    "question": "How many candidates were eligible after lookback?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-08",
+    "question": "Why were patients excluded from the original cohort?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-09",
+    "question": "How many had no continuous 12-month lookback?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "test"
+  },
+  {
+    "id": "Q08-10",
+    "question": "What were the mutually exclusive patient dispositions?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-11",
+    "question": "How many patients entered the original cohort?",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "train"
+  },
+  {
+    "id": "Q08-12",
+    "question": "Summarize the cohort eligibility counts.",
+    "gold_source": "analysis_results.md#p3",
+    "family": 7,
+    "split": "test"
+  },
+  {
+    "id": "Q09-01",
+    "question": "How many discontinuations were observed in survival analysis?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-02",
+    "question": "How many survival cohort patients were censored?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-03",
+    "question": "What was Kaplan Meier survival at 183 days?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "test"
+  },
+  {
+    "id": "Q09-04",
+    "question": "What was the size of the survival cohort?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-05",
+    "question": "How many observed events and censorings were there?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-06",
+    "question": "What was the 183-day survival probability?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "test"
+  },
+  {
+    "id": "Q09-07",
+    "question": "How many patients had an observed discontinuation event?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-08",
+    "question": "How many records were censored because of coverage?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-09",
+    "question": "What is the survival analysis baseline summary?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "test"
+  },
+  {
+    "id": "Q09-10",
+    "question": "What is the KM estimate at about six months?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-11",
+    "question": "How does survival cohort size compare with original cohort?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "train"
+  },
+  {
+    "id": "Q09-12",
+    "question": "What are the event and censor counts?",
+    "gold_source": "analysis_results.md#p4",
+    "family": 8,
+    "split": "test"
+  },
+  {
+    "id": "Q10-01",
+    "question": "What did the refill gap sensitivity analysis compare?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-02",
+    "question": "What happens to persistence with 30, 60 and 90 day gaps?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-03",
+    "question": "Which gap thresholds were tested?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "test"
+  },
+  {
+    "id": "Q10-04",
+    "question": "What cohort eligibility approaches were compared in sensitivity analysis?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-05",
+    "question": "How does the persistence estimate change when gap threshold increases?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-06",
+    "question": "What are the sensitivity scenario results?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "test"
+  },
+  {
+    "id": "Q10-07",
+    "question": "Were both fixed and observable cohorts evaluated?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-08",
+    "question": "Compare persistence at a 30-day allowed gap versus 90 days.",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-09",
+    "question": "Which refill-gap assumptions were varied?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "test"
+  },
+  {
+    "id": "Q10-10",
+    "question": "What did the scenario table measure?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-11",
+    "question": "How does a stricter gap definition affect measured persistence?",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "train"
+  },
+  {
+    "id": "Q10-12",
+    "question": "Summarize the sensitivity analysis design.",
+    "gold_source": "analysis_results.md#p5",
+    "family": 9,
+    "split": "test"
+  },
+  {
+    "id": "Q11-01",
+    "question": "Was the Kaplan Meier result independently checked with Lifelines?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-02",
+    "question": "Did the external survival library validation run?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-03",
+    "question": "What is the current KM cross validation status?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "test"
+  },
+  {
+    "id": "Q11-04",
+    "question": "Has independent Lifelines validation passed?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-05",
+    "question": "Was the survival estimate cross checked?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-06",
+    "question": "Is the independent validation complete?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "test"
+  },
+  {
+    "id": "Q11-07",
+    "question": "What does the Lifelines validation status say?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-08",
+    "question": "Can we claim that the KM implementation passed validation?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-09",
+    "question": "Which validation step has not yet been completed?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "test"
+  },
+  {
+    "id": "Q11-10",
+    "question": "Was a second implementation used to verify Kaplan Meier?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-11",
+    "question": "What is the status of independent statistical validation?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "train"
+  },
+  {
+    "id": "Q11-12",
+    "question": "Has the Lifelines package comparison been performed?",
+    "gold_source": "analysis_results.md#p6",
+    "family": 10,
+    "split": "test"
+  },
+  {
+    "id": "Q12-01",
+    "question": "Does the synthetic analysis validate the historical 68 percent?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-02",
+    "question": "Can these synthetic results prove the client's reported persistence?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-03",
+    "question": "What are the limitations of the synthetic result?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "test"
+  },
+  {
+    "id": "Q12-04",
+    "question": "Is the historical 68 percent reproduced by this analysis?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-05",
+    "question": "Can we claim the old client figure is confirmed?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-06",
+    "question": "Are the generated patient behaviours calibrated to a real population?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "test"
+  },
+  {
+    "id": "Q12-07",
+    "question": "What does the report say about the 68 percent benchmark?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-08",
+    "question": "Can the synthetic cohort establish the true persistence rate?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-09",
+    "question": "Are these results real world evidence?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "test"
+  },
+  {
+    "id": "Q12-10",
+    "question": "What conclusions can be drawn about the client's historical number?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-11",
+    "question": "Does the proof of concept validate the historical methodology?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "train"
+  },
+  {
+    "id": "Q12-12",
+    "question": "What is the key interpretation caveat?",
+    "gold_source": "analysis_results.md#p7",
+    "family": 11,
+    "split": "test"
+  }
+]

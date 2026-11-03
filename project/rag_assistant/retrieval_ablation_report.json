@@ -1,0 +1,453 @@
+{
+  "metrics": {
+    "test_questions": 48,
+    "train_questions": 96,
+    "documents": 13,
+    "BM25_only": {
+      "recall_at_5": 0.8333,
+      "mrr": 0.7456,
+      "top_1_accuracy": 0.6458
+    },
+    "BM25_plus_LSA_semantic": {
+      "recall_at_5": 0.875,
+      "mrr": 0.7477,
+      "top_1_accuracy": 0.6458
+    },
+    "BM25_plus_LSA_plus_learned_reranker": {
+      "recall_at_5": 0.875,
+      "mrr": 0.7555,
+      "top_1_accuracy": 0.6458
+    },
+    "ablation_deltas_vs_BM25": {
+      "hybrid_recall_at_5": 0.0417,
+      "hybrid_mrr": 0.0021,
+      "hybrid_top1": 0.0,
+      "reranked_recall_at_5": 0.0417,
+      "reranked_mrr": 0.0099,
+      "reranked_top1": 0.0
+    },
+    "paired_bootstrap_95ci_for_deltas": {
+      "hybrid_vs_bm25": {
+        "recall_at_5": [
+          0.0,
+          0.1042
+        ],
+        "mrr": [
+          -0.0082,
+          0.0118
+        ],
+        "top_1_accuracy": [
+          0.0,
+          0.0
+        ]
+      },
+      "reranker_vs_hybrid": {
+        "recall_at_5": [
+          0.0,
+          0.0
+        ],
+        "mrr": [
+          -0.0004,
+          0.019
+        ],
+        "top_1_accuracy": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "important_caveats": [
+      "The 144-query set is hand-authored and templated, not an independent real-user benchmark.",
+      "The semantic component is corpus-fitted TF-IDF + TruncatedSVD (LSA), not a pretrained neural embedding model.",
+      "The reranker is a supervised logistic-regression pairwise relevance model, not a neural cross-encoder.",
+      "Train/test split holds out paraphrase rows within each topic family; topic documents are shared, so this tests wording generalization over the current knowledge base, not generalization to unseen topics.",
+      "No LLM generation is evaluated here; retrieval metrics do not prove answer factuality or citation entailment."
+    ]
+  },
+  "test_case_details": [
+    {
+      "id": "Q01-03",
+      "question": "Which product code is in scope for the analysis?",
+      "gold_source": "methodology.md#p2",
+      "bm25_top1": "methodology.md#p2",
+      "hybrid_top1": "methodology.md#p2",
+      "reranked_top1": "methodology.md#p2"
+    },
+    {
+      "id": "Q01-06",
+      "question": "Are patient IDs and pharmacy transactions real?",
+      "gold_source": "methodology.md#p2",
+      "bm25_top1": "methodology.md#p2",
+      "hybrid_top1": "methodology.md#p2",
+      "reranked_top1": "methodology.md#p2"
+    },
+    {
+      "id": "Q01-09",
+      "question": "Clarify whether the dataset represents actual patients.",
+      "gold_source": "methodology.md#p2",
+      "bm25_top1": "analysis_results.md#p3",
+      "hybrid_top1": "analysis_results.md#p3",
+      "reranked_top1": "analysis_results.md#p3"
+    },
+    {
+      "id": "Q01-12",
+      "question": "Are other brands counted as treatment continuation?",
+      "gold_source": "methodology.md#p2",
+      "bm25_top1": "analysis_results.md#p6",
+      "hybrid_top1": "analysis_results.md#p6",
+      "reranked_top1": "analysis_results.md#p6"
+    },
+    {
+      "id": "Q02-03",
+      "question": "How are duplicate claim records handled?",
+      "gold_source": "methodology.md#p3",
+      "bm25_top1": "methodology.md#p3",
+      "hybrid_top1": "methodology.md#p3",
+      "reranked_top1": "methodology.md#p3"
+    },
+    {
+      "id": "Q02-06",
+      "question": "Explain pharmacy transaction cleaning and eligibility.",
+      "gold_source": "methodology.md#p3",
+      "bm25_top1": "methodology.md#p3",
+      "hybrid_top1": "methodology.md#p3",
+      "reranked_top1": "methodology.md#p3"
+    },
+    {
+      "id": "Q02-09",
+      "question": "Which field is used as the deduplication key?",
+      "gold_source": "methodology.md#p3",
+      "bm25_top1": "methodology.md#p3",
+      "hybrid_top1": "methodology.md#p3",
+      "reranked_top1": "methodology.md#p3"
+    },
+    {
+      "id": "Q02-12",
+      "question": "What claim status is excluded from the cohort?",
+      "gold_source": "methodology.md#p3",
+      "bm25_top1": "methodology.md#p3",
+      "hybrid_top1": "methodology.md#p3",
+      "reranked_top1": "methodology.md#p3"
+    },
+    {
+      "id": "Q03-03",
+      "question": "How much continuous insurance history is required before initiation?",
+      "gold_source": "methodology.md#p4",
+      "bm25_top1": "methodology.md#p4",
+      "hybrid_top1": "methodology.md#p4",
+      "reranked_top1": "methodology.md#p4"
+    },
+    {
+      "id": "Q03-06",
+      "question": "What enrollment condition applies to the lookback window?",
+      "gold_source": "methodology.md#p4",
+      "bm25_top1": "methodology.md#p4",
+      "hybrid_top1": "methodology.md#p4",
+      "reranked_top1": "methodology.md#p4"
+    },
+    {
+      "id": "Q03-09",
+      "question": "What prior medication history disqualifies a patient?",
+      "gold_source": "methodology.md#p4",
+      "bm25_top1": "methodology.md#p2",
+      "hybrid_top1": "methodology.md#p2",
+      "reranked_top1": "methodology.md#p2"
+    },
+    {
+      "id": "Q03-12",
+      "question": "Describe the new-user cohort entry rule.",
+      "gold_source": "methodology.md#p4",
+      "bm25_top1": "analysis_results.md#p6",
+      "hybrid_top1": "analysis_results.md#p6",
+      "reranked_top1": "analysis_results.md#p6"
+    },
+    {
+      "id": "Q04-03",
+      "question": "Does the original cohort require future insurance coverage?",
+      "gold_source": "methodology.md#p5",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q04-06",
+      "question": "What does the 12-month lookforward rule mean?",
+      "gold_source": "methodology.md#p5",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q04-09",
+      "question": "Does a discontinuation before the endpoint count as persistent?",
+      "gold_source": "methodology.md#p5",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q04-12",
+      "question": "What happens if coverage ends before the persistence endpoint?",
+      "gold_source": "methodology.md#p5",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q05-03",
+      "question": "When is a patient considered discontinued after a gap?",
+      "gold_source": "methodology.md#p6",
+      "bm25_top1": "methodology.md#p6",
+      "hybrid_top1": "methodology.md#p6",
+      "reranked_top1": "methodology.md#p6"
+    },
+    {
+      "id": "Q05-06",
+      "question": "How is the covered-through date calculated?",
+      "gold_source": "methodology.md#p6",
+      "bm25_top1": "methodology.md#p6",
+      "hybrid_top1": "methodology.md#p6",
+      "reranked_top1": "methodology.md#p6"
+    },
+    {
+      "id": "Q05-09",
+      "question": "Can unused medication carry over to the next fill?",
+      "gold_source": "methodology.md#p6",
+      "bm25_top1": "methodology.md#p6",
+      "hybrid_top1": "methodology.md#p6",
+      "reranked_top1": "methodology.md#p6"
+    },
+    {
+      "id": "Q05-12",
+      "question": "Explain the refill gap and discontinuation definition.",
+      "gold_source": "methodology.md#p6",
+      "bm25_top1": "methodology.md#p6",
+      "hybrid_top1": "methodology.md#p6",
+      "reranked_top1": "methodology.md#p6"
+    },
+    {
+      "id": "Q06-03",
+      "question": "Does survival analysis require 12 months of future enrollment?",
+      "gold_source": "methodology.md#p7",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q06-06",
+      "question": "What assumption does the Kaplan Meier estimator make about censoring?",
+      "gold_source": "methodology.md#p7",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q06-09",
+      "question": "Does loss of insurance count as a discontinuation event?",
+      "gold_source": "methodology.md#p7",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q06-12",
+      "question": "Explain the handling of insurance disenrollment.",
+      "gold_source": "methodology.md#p7",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q07-03",
+      "question": "What was the Wilson confidence interval for persistence?",
+      "gold_source": "analysis_results.md#p2",
+      "bm25_top1": "analysis_results.md#p2",
+      "hybrid_top1": "analysis_results.md#p2",
+      "reranked_top1": "analysis_results.md#p2"
+    },
+    {
+      "id": "Q07-06",
+      "question": "How many original cohort patients were included?",
+      "gold_source": "analysis_results.md#p2",
+      "bm25_top1": "analysis_results.md#p3",
+      "hybrid_top1": "analysis_results.md#p3",
+      "reranked_top1": "analysis_results.md#p3"
+    },
+    {
+      "id": "Q07-09",
+      "question": "Give the six month persistence numerator and denominator.",
+      "gold_source": "analysis_results.md#p2",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q07-12",
+      "question": "What is the main baseline result?",
+      "gold_source": "analysis_results.md#p2",
+      "bm25_top1": "analysis_results.md#p7",
+      "hybrid_top1": "analysis_results.md#p7",
+      "reranked_top1": "analysis_results.md#p7"
+    },
+    {
+      "id": "Q08-03",
+      "question": "What were the original cohort exclusion counts?",
+      "gold_source": "analysis_results.md#p3",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q08-06",
+      "question": "What was the cohort construction funnel?",
+      "gold_source": "analysis_results.md#p3",
+      "bm25_top1": "analysis_results.md#p3",
+      "hybrid_top1": "analysis_results.md#p3",
+      "reranked_top1": "analysis_results.md#p3"
+    },
+    {
+      "id": "Q08-09",
+      "question": "How many had no continuous 12-month lookback?",
+      "gold_source": "analysis_results.md#p3",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q08-12",
+      "question": "Summarize the cohort eligibility counts.",
+      "gold_source": "analysis_results.md#p3",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q09-03",
+      "question": "What was Kaplan Meier survival at 183 days?",
+      "gold_source": "analysis_results.md#p4",
+      "bm25_top1": "analysis_results.md#p4",
+      "hybrid_top1": "analysis_results.md#p4",
+      "reranked_top1": "analysis_results.md#p4"
+    },
+    {
+      "id": "Q09-06",
+      "question": "What was the 183-day survival probability?",
+      "gold_source": "analysis_results.md#p4",
+      "bm25_top1": "analysis_results.md#p4",
+      "hybrid_top1": "analysis_results.md#p4",
+      "reranked_top1": "analysis_results.md#p4"
+    },
+    {
+      "id": "Q09-09",
+      "question": "What is the survival analysis baseline summary?",
+      "gold_source": "analysis_results.md#p4",
+      "bm25_top1": "methodology.md#p7",
+      "hybrid_top1": "methodology.md#p7",
+      "reranked_top1": "methodology.md#p7"
+    },
+    {
+      "id": "Q09-12",
+      "question": "What are the event and censor counts?",
+      "gold_source": "analysis_results.md#p4",
+      "bm25_top1": "methodology.md#p5",
+      "hybrid_top1": "methodology.md#p5",
+      "reranked_top1": "methodology.md#p5"
+    },
+    {
+      "id": "Q10-03",
+      "question": "Which gap thresholds were tested?",
+      "gold_source": "analysis_results.md#p5",
+      "bm25_top1": "methodology.md#p6",
+      "hybrid_top1": "methodology.md#p6",
+      "reranked_top1": "methodology.md#p6"
+    },
+    {
+      "id": "Q10-06",
+      "question": "What are the sensitivity scenario results?",
+      "gold_source": "analysis_results.md#p5",
+      "bm25_top1": "analysis_results.md#p5",
+      "hybrid_top1": "analysis_results.md#p5",
+      "reranked_top1": "analysis_results.md#p5"
+    },
+    {
+      "id": "Q10-09",
+      "question": "Which refill-gap assumptions were varied?",
+      "gold_source": "analysis_results.md#p5",
+      "bm25_top1": "methodology.md#p6",
+      "hybrid_top1": "methodology.md#p6",
+      "reranked_top1": "methodology.md#p6"
+    },
+    {
+      "id": "Q10-12",
+      "question": "Summarize the sensitivity analysis design.",
+      "gold_source": "analysis_results.md#p5",
+      "bm25_top1": "analysis_results.md#p5",
+      "hybrid_top1": "analysis_results.md#p5",
+      "reranked_top1": "analysis_results.md#p5"
+    },
+    {
+      "id": "Q11-03",
+      "question": "What is the current KM cross validation status?",
+      "gold_source": "analysis_results.md#p6",
+      "bm25_top1": "analysis_results.md#p6",
+      "hybrid_top1": "analysis_results.md#p6",
+      "reranked_top1": "analysis_results.md#p6"
+    },
+    {
+      "id": "Q11-06",
+      "question": "Is the independent validation complete?",
+      "gold_source": "analysis_results.md#p6",
+      "bm25_top1": "analysis_results.md#p6",
+      "hybrid_top1": "analysis_results.md#p6",
+      "reranked_top1": "analysis_results.md#p6"
+    },
+    {
+      "id": "Q11-09",
+      "question": "Which validation step has not yet been completed?",
+      "gold_source": "analysis_results.md#p6",
+      "bm25_top1": "analysis_results.md#p6",
+      "hybrid_top1": "analysis_results.md#p6",
+      "reranked_top1": "analysis_results.md#p6"
+    },
+    {
+      "id": "Q11-12",
+      "question": "Has the Lifelines package comparison been performed?",
+      "gold_source": "analysis_results.md#p6",
+      "bm25_top1": "analysis_results.md#p6",
+      "hybrid_top1": "analysis_results.md#p6",
+      "reranked_top1": "analysis_results.md#p6"
+    },
+    {
+      "id": "Q12-03",
+      "question": "What are the limitations of the synthetic result?",
+      "gold_source": "analysis_results.md#p7",
+      "bm25_top1": "analysis_results.md#p7",
+      "hybrid_top1": "analysis_results.md#p7",
+      "reranked_top1": "analysis_results.md#p7"
+    },
+    {
+      "id": "Q12-06",
+      "question": "Are the generated patient behaviours calibrated to a real population?",
+      "gold_source": "analysis_results.md#p7",
+      "bm25_top1": "methodology.md#p8",
+      "hybrid_top1": "methodology.md#p8",
+      "reranked_top1": "methodology.md#p8"
+    },
+    {
+      "id": "Q12-09",
+      "question": "Are these results real world evidence?",
+      "gold_source": "analysis_results.md#p7",
+      "bm25_top1": "analysis_results.md#p7",
+      "hybrid_top1": "analysis_results.md#p7",
+      "reranked_top1": "analysis_results.md#p7"
+    },
+    {
+      "id": "Q12-12",
+      "question": "What is the key interpretation caveat?",
+      "gold_source": "analysis_results.md#p7",
+      "bm25_top1": "methodology.md#p3",
+      "hybrid_top1": "methodology.md#p3",
+      "reranked_top1": "methodology.md#p3"
+    }
+  ]
+}

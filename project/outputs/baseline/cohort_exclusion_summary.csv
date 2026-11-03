@@ -1,0 +1,5 @@
+reason,patient_count
+included_in_original_cohort,1099
+12_month_lookforward_not_met,230
+prior_target_drug_use_in_washout,141
+no_continuous_12m_lookback,30

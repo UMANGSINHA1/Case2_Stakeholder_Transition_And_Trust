@@ -1,0 +1,18 @@
+{
+  "positive_set": {
+    "n": 14,
+    "answerability_accuracy": 1.0,
+    "source_recall_at_5": 1.0,
+    "citation_validity": 1.0
+  },
+  "negative_set": {
+    "n": 40,
+    "abstention_rate": 1.0,
+    "false_accepts": 0,
+    "false_accept_ids": []
+  },
+  "combined_correct_classifications": 54,
+  "combined_cases": 54,
+  "combined_accuracy": 1.0,
+  "caveat": "Small hand-authored benchmark; guardrail patterns were iteratively refined using the negative test set, so the 100% score is a development-set result and is not an unbiased estimate of production performance. Positive set contains only 10 supported and 4 unsupported questions; LLM mode was not exercised."
+}

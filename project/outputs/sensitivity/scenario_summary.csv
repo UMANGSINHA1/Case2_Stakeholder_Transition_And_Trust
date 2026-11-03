@@ -1,0 +1,7 @@
+scenario,gap_days,lookforward_rule,cohort_n,persistent_n,persistence_pct
+gap_30_12_months,30,12_months,1099,673,61.237488626023655
+gap_30_six_month_observable,30,six_month_observable,1230,756,61.46341463414634
+gap_60_12_months,60,12_months,1099,766,69.69972702456779
+gap_60_six_month_observable,60,six_month_observable,1230,862,70.08130081300813
+gap_90_12_months,90,12_months,1099,832,75.70518653321201
+gap_90_six_month_observable,90,six_month_observable,1230,931,75.6910569105691

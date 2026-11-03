@@ -1,0 +1,38 @@
+{
+  "analysis_version": "1.1.0",
+  "synthetic_data_only": true,
+  "config": {
+    "lookback_months": 12,
+    "lookforward_months": 12,
+    "allowed_gap_days": 60,
+    "persistence_months": 6,
+    "stockpiling_cap_days": 30,
+    "drug_id": "TARGET_BRAND_A"
+  },
+  "patients_with_claims": 1500,
+  "candidate_patients": 1500,
+  "lookback_eligible": 1329,
+  "original_cohort_n": 1099,
+  "persistent_6m_n": 766,
+  "persistent_6m_pct": 69.69972702456779,
+  "persistent_6m_wilson_95ci_pct": [
+    66.91798632216381,
+    72.34423006776241
+  ],
+  "exclusion_reason_counts": {
+    "included_in_original_cohort": 1099,
+    "12_month_lookforward_not_met": 230,
+    "prior_target_drug_use_in_washout": 141,
+    "no_continuous_12m_lookback": 30
+  },
+  "survival_cohort_n": 1329,
+  "observed_discontinuations": 598,
+  "censored_n": 731,
+  "km_survival_at_183_days": 0.697020092962748,
+  "lifelines_cross_validation": {
+    "status": "not_run_lifelines_not_installed",
+    "max_absolute_difference": null,
+    "lifelines_version": null
+  },
+  "note": "Synthetic demonstration only; does not reproduce or validate historical 68%."
+}

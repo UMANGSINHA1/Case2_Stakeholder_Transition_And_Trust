@@ -1,0 +1,12 @@
+{
+  "methodology.md": {
+    "title": "Approved POC methodology",
+    "type": "methodology",
+    "status": "POC assumptions; client confirmation required"
+  },
+  "analysis_results.md": {
+    "title": "Baseline synthetic analysis results",
+    "type": "analysis_result",
+    "status": "Generated from synthetic data; not real-world evidence"
+  }
+}

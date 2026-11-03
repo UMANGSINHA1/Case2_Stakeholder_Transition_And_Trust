@@ -1,0 +1,49 @@
+id,question,gold_source,bm25_top1,hybrid_top1,reranked_top1
+Q01-03,Which product code is in scope for the analysis?,methodology.md#p2,methodology.md#p2,methodology.md#p2,methodology.md#p2
+Q01-06,Are patient IDs and pharmacy transactions real?,methodology.md#p2,methodology.md#p2,methodology.md#p2,methodology.md#p2
+Q01-09,Clarify whether the dataset represents actual patients.,methodology.md#p2,analysis_results.md#p3,analysis_results.md#p3,analysis_results.md#p3
+Q01-12,Are other brands counted as treatment continuation?,methodology.md#p2,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6
+Q02-03,How are duplicate claim records handled?,methodology.md#p3,methodology.md#p3,methodology.md#p3,methodology.md#p3
+Q02-06,Explain pharmacy transaction cleaning and eligibility.,methodology.md#p3,methodology.md#p3,methodology.md#p3,methodology.md#p3
+Q02-09,Which field is used as the deduplication key?,methodology.md#p3,methodology.md#p3,methodology.md#p3,methodology.md#p3
+Q02-12,What claim status is excluded from the cohort?,methodology.md#p3,methodology.md#p3,methodology.md#p3,methodology.md#p3
+Q03-03,How much continuous insurance history is required before initiation?,methodology.md#p4,methodology.md#p4,methodology.md#p4,methodology.md#p4
+Q03-06,What enrollment condition applies to the lookback window?,methodology.md#p4,methodology.md#p4,methodology.md#p4,methodology.md#p4
+Q03-09,What prior medication history disqualifies a patient?,methodology.md#p4,methodology.md#p2,methodology.md#p2,methodology.md#p2
+Q03-12,Describe the new-user cohort entry rule.,methodology.md#p4,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6
+Q04-03,Does the original cohort require future insurance coverage?,methodology.md#p5,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q04-06,What does the 12-month lookforward rule mean?,methodology.md#p5,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q04-09,Does a discontinuation before the endpoint count as persistent?,methodology.md#p5,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q04-12,What happens if coverage ends before the persistence endpoint?,methodology.md#p5,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q05-03,When is a patient considered discontinued after a gap?,methodology.md#p6,methodology.md#p6,methodology.md#p6,methodology.md#p6
+Q05-06,How is the covered-through date calculated?,methodology.md#p6,methodology.md#p6,methodology.md#p6,methodology.md#p6
+Q05-09,Can unused medication carry over to the next fill?,methodology.md#p6,methodology.md#p6,methodology.md#p6,methodology.md#p6
+Q05-12,Explain the refill gap and discontinuation definition.,methodology.md#p6,methodology.md#p6,methodology.md#p6,methodology.md#p6
+Q06-03,Does survival analysis require 12 months of future enrollment?,methodology.md#p7,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q06-06,What assumption does the Kaplan Meier estimator make about censoring?,methodology.md#p7,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q06-09,Does loss of insurance count as a discontinuation event?,methodology.md#p7,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q06-12,Explain the handling of insurance disenrollment.,methodology.md#p7,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q07-03,What was the Wilson confidence interval for persistence?,analysis_results.md#p2,analysis_results.md#p2,analysis_results.md#p2,analysis_results.md#p2
+Q07-06,How many original cohort patients were included?,analysis_results.md#p2,analysis_results.md#p3,analysis_results.md#p3,analysis_results.md#p3
+Q07-09,Give the six month persistence numerator and denominator.,analysis_results.md#p2,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q07-12,What is the main baseline result?,analysis_results.md#p2,analysis_results.md#p7,analysis_results.md#p7,analysis_results.md#p7
+Q08-03,What were the original cohort exclusion counts?,analysis_results.md#p3,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q08-06,What was the cohort construction funnel?,analysis_results.md#p3,analysis_results.md#p3,analysis_results.md#p3,analysis_results.md#p3
+Q08-09,How many had no continuous 12-month lookback?,analysis_results.md#p3,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q08-12,Summarize the cohort eligibility counts.,analysis_results.md#p3,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q09-03,What was Kaplan Meier survival at 183 days?,analysis_results.md#p4,analysis_results.md#p4,analysis_results.md#p4,analysis_results.md#p4
+Q09-06,What was the 183-day survival probability?,analysis_results.md#p4,analysis_results.md#p4,analysis_results.md#p4,analysis_results.md#p4
+Q09-09,What is the survival analysis baseline summary?,analysis_results.md#p4,methodology.md#p7,methodology.md#p7,methodology.md#p7
+Q09-12,What are the event and censor counts?,analysis_results.md#p4,methodology.md#p5,methodology.md#p5,methodology.md#p5
+Q10-03,Which gap thresholds were tested?,analysis_results.md#p5,methodology.md#p6,methodology.md#p6,methodology.md#p6
+Q10-06,What are the sensitivity scenario results?,analysis_results.md#p5,analysis_results.md#p5,analysis_results.md#p5,analysis_results.md#p5
+Q10-09,Which refill-gap assumptions were varied?,analysis_results.md#p5,methodology.md#p6,methodology.md#p6,methodology.md#p6
+Q10-12,Summarize the sensitivity analysis design.,analysis_results.md#p5,analysis_results.md#p5,analysis_results.md#p5,analysis_results.md#p5
+Q11-03,What is the current KM cross validation status?,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6
+Q11-06,Is the independent validation complete?,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6
+Q11-09,Which validation step has not yet been completed?,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6
+Q11-12,Has the Lifelines package comparison been performed?,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6,analysis_results.md#p6
+Q12-03,What are the limitations of the synthetic result?,analysis_results.md#p7,analysis_results.md#p7,analysis_results.md#p7,analysis_results.md#p7
+Q12-06,Are the generated patient behaviours calibrated to a real population?,analysis_results.md#p7,methodology.md#p8,methodology.md#p8,methodology.md#p8
+Q12-09,Are these results real world evidence?,analysis_results.md#p7,analysis_results.md#p7,analysis_results.md#p7,analysis_results.md#p7
+Q12-12,What is the key interpretation caveat?,analysis_results.md#p7,methodology.md#p3,methodology.md#p3,methodology.md#p3

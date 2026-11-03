@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medication Persistence | Analytics Explorer</title>
+<style>
+:root{--bg:#f4f7fb;--panel:#fff;--ink:#172337;--muted:#627087;--line:#e3e9f1;--blue:#315fba;--teal:#16866f;--amber:#b7791f;--red:#b64c4c;--soft:#edf3ff;--shadow:0 8px 26px rgba(27,48,79,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:#13233d;color:#fff;padding:26px max(22px,calc((100vw - 1240px)/2));}
+header .eyebrow{color:#b8c9e5;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700}
+h1{font-size:27px;margin:6px 0 5px}header p{color:#d1dced;margin:0;max-width:850px}
+.wrap{max-width:1240px;margin:22px auto;padding:0 18px 40px}
+.notice{background:#fff7e7;border:1px solid #f0d8a6;color:#684b17;padding:13px 16px;border-radius:12px;margin-bottom:18px}
+.toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;background:var(--panel);padding:16px;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:18px}
+.control{min-width:190px;flex:1}.control label{display:block;color:var(--muted);font-size:12px;font-weight:700;margin-bottom:6px}
+select{width:100%;padding:10px 12px;border:1px solid #ccd6e3;border-radius:8px;background:white;color:var(--ink);font:inherit}
+button{border:0;border-radius:8px;padding:11px 16px;background:var(--blue);color:white;font-weight:700;cursor:pointer}button.secondary{background:#eaf0f8;color:#233c62}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.card,.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.card{padding:17px}.metric-label{font-size:12px;color:var(--muted);font-weight:700}.metric{font-size:29px;font-weight:750;letter-spacing:-.03em;margin:4px 0}.sub{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:16px}
+.panel{padding:18px;min-width:0}.panel h2{font-size:17px;margin:0 0 4px}.desc{font-size:12px;color:var(--muted);margin:0 0 14px}
+.chart{width:100%;height:auto;display:block;overflow:visible}.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:8px}.key{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:5px;background:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.pill{display:inline-block;border-radius:99px;background:#eaf5f1;color:#176b58;padding:3px 8px;font-size:11px;font-weight:700}
+.warn{background:#fff4e6;color:#875512}.muted{color:var(--muted)}
+.funnel{display:grid;gap:8px}.funnel-row{display:grid;grid-template-columns:1fr 70px;gap:10px;align-items:center}.barbg{height:12px;background:#edf1f6;border-radius:99px;overflow:hidden;margin-top:5px}.barfill{height:100%;background:#4b79c8;border-radius:99px}
+.assumptions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.assumption{padding:11px;background:#f7f9fc;border:1px solid var(--line);border-radius:9px}.assumption b{display:block;font-size:12px}.assumption span{font-size:13px;color:var(--muted)}
+.footer{font-size:12px;color:var(--muted);text-align:center;padding:20px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}
+@media(max-width:500px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:23px}.assumptions{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+ <div class="eyebrow">Pharmaceutical analytics · Synthetic proof of concept</div>
+ <h1>Medication Persistence Explorer</h1>
+ <p>Reconstruct the original six-month persistence methodology, inspect cohort eligibility, explore refill-gap sensitivity and review time to discontinuation.</p>
+</header>
+<div class="wrap">
+ <div class="notice"><b>Important:</b> All figures on this dashboard are generated from synthetic data. The displayed result is not a reproduction or validation of the client's historical 68% claim. Historical 68% is shown only as a reference benchmark.</div>
+
+ <section class="toolbar">
+  <div class="control"><label for="gap">Maximum permitted refill gap</label>
+   <select id="gap"><option value="30">30 days</option><option value="60" selected>60 days · Original method</option><option value="90">90 days</option></select>
+  </div>
+  <div class="control"><label for="cohort">Cohort eligibility</label>
+   <select id="cohort"><option value="12_months">Original: 12-month look-forward</option><option value="six_month_observable">Alternative: observable at six months</option></select>
+  </div>
+  <div><button id="reset" class="secondary">Reset baseline</button></div>
+  <div class="sub" id="scenarioLabel">Baseline scenario</div>
+ </section>
+
+ <section class="grid">
+  <div class="card"><div class="metric-label">Six-month persistence</div><div class="metric" id="persistence">—</div><div class="sub" id="ci">95% CI: baseline cohort</div></div>
+  <div class="card"><div class="metric-label">Eligible cohort</div><div class="metric" id="cohortN">—</div><div class="sub">Patients in selected scenario</div></div>
+  <div class="card"><div class="metric-label">Persistent at six months</div><div class="metric" id="persistentN">—</div><div class="sub">Patients meeting endpoint definition</div></div>
+  <div class="card"><div class="metric-label">Historical reference</div><div class="metric">68%</div><div class="sub">Client-reported figure · not independently verified</div></div>
+ </section>
+
+ <section class="layout">
+  <div class="panel">
+   <h2>Time to discontinuation</h2><p class="desc">Kaplan–Meier estimate for the look-back-eligible survival cohort. Step curve is based on observed discontinuation events; insurance loss is censored.</p>
+   <svg id="kmChart" class="chart" viewBox="0 0 720 330" role="img" aria-label="Kaplan Meier persistence curve"></svg>
+   <div class="legend"><span><i class="key" style="background:#16866f"></i>Estimated persistence</span><span><i class="key" style="background:#b7791f"></i>Historical 68% reference (at six months)</span></div>
+   <p class="sub" id="kmSummary"></p>
+  </div>
+  <div class="panel">
+   <h2>Cohort construction</h2><p class="desc">Disposition of synthetic patients under the original cohort definition.</p>
+   <div id="funnel" class="funnel"></div>
+   <p class="sub">Counts reconcile to the 1,500 generated candidate patients. Exclusion reasons are mutually exclusive in this implementation.</p>
+  </div>
+ </section>
+
+ <section class="layout">
+  <div class="panel">
+   <h2>Sensitivity analysis</h2><p class="desc">Six-month persistence changes when the refill-gap threshold and enrolment eligibility rule change. Select a scenario above to highlight it.</p>
+   <svg id="sensitivityChart" class="chart" viewBox="0 0 680 290" role="img" aria-label="Sensitivity analysis chart"></svg>
+   <div id="sensitivityTable"></div>
+  </div>
+  <div class="panel">
+   <h2>Analysis interpretation</h2>
+   <p class="desc">What the current synthetic run tells us.</p>
+   <ul id="interpretation" style="padding-left:19px;margin-top:0"></ul>
+   <div class="notice" style="margin:12px 0 0"><b>Interpretation guardrail:</b> Changing look-forward eligibility changes the denominator and patient mix. Do not attribute the entire difference to medication behaviour.</div>
+  </div>
+ </section>
+
+ <section class="panel" style="margin-bottom:16px">
+  <h2>Methodology and assumptions</h2><p class="desc">Baseline rules implemented in analysis version 1.1.0.</p>
+  <div class="assumptions" id="assumptions"></div>
+ </section>
+
+ <section class="panel">
+  <h2>Validation and limitations</h2>
+  <div class="layout" style="margin:12px 0 0">
+   <div>
+    <b>Implemented validation</b>
+    <ul>
+     <li>Paid claims only; rejected and reversed claims excluded.</li>
+     <li>12-month continuous look-back and washout.</li>
+     <li>12-month continuous look-forward for original cohort.</li>
+     <li>Refill-gap boundary tests at 60 and 61 days.</li>
+     <li>Early refill, restart and insurance-loss tests.</li>
+     <li>Wilson 95% confidence interval for fixed six-month proportion.</li>
+    </ul>
+   </div>
+   <div>
+    <b>Outstanding / interpret carefully</b>
+    <ul>
+     <li>Lifelines cross-validation has not run in the build environment; install Lifelines and rerun locally.</li>
+     <li>Kaplan–Meier non-informative censoring assumption may not hold for insurance loss.</li>
+     <li>Stockpiling cap of 30 days is a proposed assumption, not specified by the case.</li>
+     <li>Claims indicate dispensing, not ingestion or adherence.</li>
+     <li>Synthetic data cannot validate real-world patient persistence or the historical 68%.</li>
+    </ul>
+   </div>
+  </div>
+ </section>
+ <div class="footer">Medication Persistence Explorer · Analysis v1.1.0 · Synthetic data only · No patient-level data embedded</div>
+</div>
+
+<script id="dashboard-data" type="application/json">{"summary": {"analysis_version": "1.1.0", "synthetic_data_only": true, "config": {"lookback_months": 12, "lookforward_months": 12, "allowed_gap_days": 60, "persistence_months": 6, "stockpiling_cap_days": 30, "drug_id": "TARGET_BRAND_A"}, "patients_with_claims": 1500, "candidate_patients": 1500, "lookback_eligible": 1329, "original_cohort_n": 1099, "persistent_6m_n": 766, "persistent_6m_pct": 69.69972702456779, "persistent_6m_wilson_95ci_pct": [66.91798632216381, 72.34423006776241], "exclusion_reason_counts": {"included_in_original_cohort": 1099, "12_month_lookforward_not_met": 230, "prior_target_drug_use_in_washout": 141, "no_continuous_12m_lookback": 30}, "survival_cohort_n": 1329, "observed_discontinuations": 598, "censored_n": 731, "km_survival_at_183_days": 0.697020092962748, "lifelines_cross_validation": {"status": "not_run_lifelines_not_installed", "max_absolute_difference": null, "lifelines_version": null}, "note": "Synthetic demonstration only; does not reproduce or validate historical 68%."}, "sensitivity": [{"scenario": "gap_30_12_months", "gap_days": "30", "lookforward_rule": "12_months", "cohort_n": "1099", "persistent_n": "673", "persistence_pct": "61.237488626023655"}, {"scenario": "gap_30_six_month_observable", "gap_days": "30", "lookforward_rule": "six_month_observable", "cohort_n": "1230", "persistent_n": "756", "persistence_pct": "61.46341463414634"}, {"scenario": "gap_60_12_months", "gap_days": "60", "lookforward_rule": "12_months", "cohort_n": "1099", "persistent_n": "766", "persistence_pct": "69.69972702456779"}, {"scenario": "gap_60_six_month_observable", "gap_days": "60", "lookforward_rule": "six_month_observable", "cohort_n": "1230", "persistent_n": "862", "persistence_pct": "70.08130081300813"}, {"scenario": "gap_90_12_months", "gap_days": "90", "lookforward_rule": "12_months", "cohort_n": "1099", "persistent_n": "832", "persistence_pct": "75.70518653321201"}, {"scenario": "gap_90_six_month_observable", "gap_days": "90", "lookforward_rule": "six_month_observable", "cohort_n": "1230", "persistent_n": "931", "persistence_pct": "75.6910569105691"}], "km": [{"time_days": "88", "at_risk": "1329", "events": "32", "survival": "0.9759217456734387", "ci_lower": "0.9661217862818005", "ci_upper": "0.9829119263128265"}, {"time_days": "90", "at_risk": "1297", "events": "119", "survival": "0.8863807373965388", "ci_lower": "0.8680738498991348", "ci_upper": "0.902291672533654"}, {"time_days": "91", "at_risk": "1177", "events": "41", "survival": "0.8555042631116976", "ci_lower": "0.8354349061325925", "ci_upper": "0.8733143763086761"}, {"time_days": "115", "at_risk": "1119", "events": "6", "survival": "0.8509171088858976", "ci_lower": "0.8306071702365935", "ci_upper": "0.8689869130529606"}, {"time_days": "116", "at_risk": "1111", "events": "3", "survival": "0.8486194029213092", "ci_lower": "0.8281910465359643", "ci_upper": "0.8668171631557017"}, {"time_days": "117", "at_risk": "1107", "events": "14", "survival": "0.8378870888825574", "ci_lower": "0.8169254779772742", "ci_upper": "0.8566628490262888"}, {"time_days": "118", "at_risk": "1092", "events": "19", "survival": "0.823308467372696", "ci_lower": "0.8016722990111469", "ci_upper": "0.8428202102022102"}, {"time_days": "119", "at_risk": "1072", "events": "26", "survival": "0.8033401649923881", "ci_lower": "0.7808642673803288", "ci_upper": "0.8237768598080419"}, {"time_days": "120", "at_risk": "1045", "events": "18", "survival": "0.7895027267437154", "ci_lower": "0.7664964293723201", "ci_upper": "0.8105294914695202"}, {"time_days": "121", "at_risk": "1026", "events": "34", "survival": "0.763339868352598", "ci_lower": "0.7394342237130282", "ci_upper": "0.7853800069741537"}, {"time_days": "122", "at_risk": "991", "events": "22", "survival": "0.7463938773296341", "ci_lower": "0.7219716619594231", "ci_upper": "0.7690251875622599"}, {"time_days": "123", "at_risk": "968", "events": "13", "survival": "0.7363699926134304", "ci_lower": "0.7116645516289645", "ci_upper": "0.759328869997946"}, {"time_days": "124", "at_risk": "955", "events": "6", "survival": "0.7317435842828748", "ci_lower": "0.7069129709624338", "ci_upper": "0.7548481746805881"}, {"time_days": "125", "at_risk": "949", "events": "2", "survival": "0.7302014481726896", "ci_lower": "0.7053298736387076", "ci_upper": "0.7533538568798854"}, {"time_days": "126", "at_risk": "947", "events": "3", "survival": "0.7278882440074118", "ci_lower": "0.7029559355496079", "ci_upper": "0.7511116816795314"}, {"time_days": "133", "at_risk": "935", "events": "4", "survival": "0.7247742836052411", "ci_lower": "0.6997595883918081", "ci_upper": "0.7480937279408171"}, {"time_days": "135", "at_risk": "930", "events": "3", "survival": "0.7224363020452242", "ci_lower": "0.6973606016175645", "ci_upper": "0.7458269756491387"}, {"time_days": "136", "at_risk": "927", "events": "2", "survival": "0.7208776476718796", "ci_lower": "0.695761758787243", "ci_upper": "0.7443153353127262"}, {"time_days": "143", "at_risk": "918", "events": "4", "survival": "0.7177365685970566", "ci_lower": "0.6925392847902603", "ci_upper": "0.7412692291264541"}, {"time_days": "145", "at_risk": "913", "events": "6", "survival": "0.7130197893948854", "ci_lower": "0.6877028772355591", "ci_upper": "0.7366924957093267"}, {"time_days": "146", "at_risk": "907", "events": "2", "survival": "0.7114475296608284", "ci_lower": "0.6860915179659414", "ci_upper": "0.735166160250269"}, {"time_days": "160", "at_risk": "895", "events": "1", "survival": "0.7106526162198665", "ci_lower": "0.6852764008636387", "ci_upper": "0.7343948319694604"}, {"time_days": "163", "at_risk": "889", "events": "2", "survival": "0.7090538476794394", "ci_lower": "0.6836367084248933", "ci_upper": "0.7328437240622577"}, {"time_days": "165", "at_risk": "886", "events": "7", "survival": "0.7034518421108659", "ci_lower": "0.677894115709292", "ci_upper": "0.7274059677965945"}, {"time_days": "166", "at_risk": "879", "events": "3", "survival": "0.7010509825814772", "ci_lower": "0.6754345268273095", "ci_upper": "0.7250740294184679"}, {"time_days": "178", "at_risk": "870", "events": "3", "survival": "0.6986335654001617", "ci_lower": "0.6729577955809333", "ci_upper": "0.7227260878899423"}, {"time_days": "180", "at_risk": "866", "events": "2", "survival": "0.697020092962748", "ci_lower": "0.6713051258264067", "ci_upper": "0.7211585990360281"}, {"time_days": "188", "at_risk": "857", "events": "1", "survival": "0.6962067673000144", "ci_lower": "0.6704717587291221", "ci_upper": "0.7203686894240381"}, {"time_days": "195", "at_risk": "852", "events": "1", "survival": "0.6953896232069393", "ci_lower": "0.6696343308294203", "ci_upper": "0.7195751938227172"}, {"time_days": "198", "at_risk": "848", "events": "1", "survival": "0.6945695882739122", "ci_lower": "0.6687938551614733", "ci_upper": "0.7187789580744116"}, {"time_days": "200", "at_risk": "847", "events": "4", "survival": "0.691289448541804", "ci_lower": "0.6654330395809154", "ci_upper": "0.7155929762508673"}, {"time_days": "208", "at_risk": "833", "events": "1", "survival": "0.6904595692518378", "ci_lower": "0.664582360435477", "ci_upper": "0.7147872428622231"}, {"time_days": "210", "at_risk": "831", "events": "4", "survival": "0.687136057486486", "ci_lower": "0.6611764126792063", "ci_upper": "0.7115595924698518"}, {"time_days": "211", "at_risk": "827", "events": "1", "survival": "0.686305179545148", "ci_lower": "0.6603252076949356", "ci_upper": "0.7107524118712613"}, {"time_days": "213", "at_risk": "822", "events": "2", "survival": "0.68463533725915", "ci_lower": "0.658614309306636", "ci_upper": "0.709130353880654"}, {"time_days": "218", "at_risk": "815", "events": "2", "survival": "0.6829552505419497", "ci_lower": "0.6568926835598518", "ci_upper": "0.7074985209202528"}, {"time_days": "220", "at_risk": "811", "events": "1", "survival": "0.6821131355597772", "ci_lower": "0.6560297828738165", "ci_upper": "0.7066805508363364"}, {"time_days": "221", "at_risk": "810", "events": "1", "survival": "0.6812710205776046", "ci_lower": "0.6551669993109581", "ci_upper": "0.705862469983467"}, {"time_days": "225", "at_risk": "805", "events": "1", "survival": "0.6804247211731603", "ci_lower": "0.6542997626272431", "ci_upper": "0.7050404646659026"}, {"time_days": "226", "at_risk": "804", "events": "1", "survival": "0.6795784217687161", "ci_lower": "0.6534326448922055", "ci_upper": "0.7042183470634219"}, {"time_days": "235", "at_risk": "797", "events": "2", "survival": "0.6778730806852312", "ci_lower": "0.6516848472967325", "ci_upper": "0.7025621637982468"}, {"time_days": "236", "at_risk": "795", "events": "4", "survival": "0.6744623985182615", "ci_lower": "0.6481907104588871", "ci_upper": "0.6992484241286272"}, {"time_days": "240", "at_risk": "788", "events": "1", "survival": "0.6736064817688728", "ci_lower": "0.6473139331908815", "ci_upper": "0.6984167460679949"}, {"time_days": "245", "at_risk": "779", "events": "2", "survival": "0.67187706846523", "ci_lower": "0.6455415393972266", "ci_upper": "0.6967370299031271"}, {"time_days": "248", "at_risk": "774", "events": "1", "survival": "0.6710090102372387", "ci_lower": "0.6446518685343231", "ci_upper": "0.695893942665544"}, {"time_days": "253", "at_risk": "769", "events": "2", "survival": "0.6692638632665306", "ci_lower": "0.6428630381177033", "ci_upper": "0.6941991885550745"}, {"time_days": "255", "at_risk": "765", "events": "3", "survival": "0.666639299096858", "ci_lower": "0.6401732891433527", "ci_upper": "0.6916499136697253"}, {"time_days": "256", "at_risk": "762", "events": "1", "survival": "0.6657644443736338", "ci_lower": "0.6392769682141485", "ci_upper": "0.6907999106060183"}, {"time_days": "263", "at_risk": "755", "events": "1", "survival": "0.6648826371625428", "ci_lower": "0.6383731746651066", "ci_upper": "0.6899434595635262"}, {"time_days": "265", "at_risk": "751", "events": "4", "survival": "0.6613413181896398", "ci_lower": "0.6347439376467658", "ci_upper": "0.6865035816763316"}, {"time_days": "266", "at_risk": "747", "events": "1", "survival": "0.6604559884464141", "ci_lower": "0.6338369671915635", "ci_upper": "0.6856432967729749"}, {"time_days": "268", "at_risk": "743", "events": "3", "survival": "0.6577892751687031", "ci_lower": "0.6311051421268201", "ci_upper": "0.683051927604444"}, {"time_days": "269", "at_risk": "739", "events": "1", "survival": "0.6568991678951325", "ci_lower": "0.6301934910082461", "ci_upper": "0.6821867898461189"}, {"time_days": "270", "at_risk": "737", "events": "12", "survival": "0.646203387685171", "ci_lower": "0.6192484040681925", "ci_upper": "0.6717821031364463"}, {"time_days": "271", "at_risk": "724", "events": "10", "survival": "0.6372779265292985", "ci_lower": "0.6101287188324733", "ci_upper": "0.6630866339660408"}, {"time_days": "272", "at_risk": "714", "events": "13", "survival": "0.6256748270266642", "ci_lower": "0.5982925180520697", "ci_upper": "0.6517643793453868"}, {"time_days": "273", "at_risk": "700", "events": "8", "survival": "0.6185242575749309", "ci_lower": "0.5910082743079159", "ci_upper": "0.6447775039720166"}, {"time_days": "274", "at_risk": "691", "events": "12", "survival": "0.6077828811771029", "ci_lower": "0.5800800298773992", "ci_upper": "0.6342688965645478"}, {"time_days": "275", "at_risk": "679", "events": "7", "survival": "0.6015170782783699", "ci_lower": "0.5737133791922424", "ci_upper": "0.6281311928301051"}, {"time_days": "276", "at_risk": "672", "events": "3", "survival": "0.5988317341789129", "ci_lower": "0.5709866285826787", "ci_upper": "0.6254990374300293"}, {"time_days": "277", "at_risk": "669", "events": "4", "survival": "0.5952512753796368", "ci_lower": "0.5673526394717299", "ci_upper": "0.6219879122918383"}, {"time_days": "278", "at_risk": "665", "events": "5", "survival": "0.5907757018805418", "ci_lower": "0.5628128311688357", "ci_upper": "0.6175964753251321"}, {"time_days": "280", "at_risk": "657", "events": "3", "survival": "0.5880780959358819", "ci_lower": "0.5600771369347328", "ci_upper": "0.6149489676383321"}, {"time_days": "281", "at_risk": "654", "events": "1", "survival": "0.5871788939543285", "ci_lower": "0.5591654785735494", "ci_upper": "0.6140662386397535"}, {"time_days": "282", "at_risk": "653", "events": "1", "survival": "0.5862796919727752", "ci_lower": "0.5582539397317327", "ci_upper": "0.6131833967054344"}, {"time_days": "286", "at_risk": "650", "events": "1", "survival": "0.585377723215894", "ci_lower": "0.557339535077628", "ci_upper": "0.612297891854762"}, {"time_days": "288", "at_risk": "648", "events": "1", "survival": "0.5844743625319189", "ci_lower": "0.5564237491380783", "ci_upper": "0.6114109903090865"}, {"time_days": "289", "at_risk": "646", "events": "1", "survival": "0.5835696034567921", "ci_lower": "0.5555065754853841", "ci_upper": "0.6105226856605493"}, {"time_days": "290", "at_risk": "645", "events": "2", "survival": "0.5817600853065384", "ci_lower": "0.553672593441557", "ci_upper": "0.6087457317113376"}, {"time_days": "291", "at_risk": "642", "events": "3", "survival": "0.5790415802350126", "ci_lower": "0.550917972184944", "ci_upper": "0.6060755424093655"}, {"time_days": "292", "at_risk": "639", "events": "5", "survival": "0.5745107384491361", "ci_lower": "0.546329366368122", "ci_upper": "0.6016229332109252"}, {"time_days": "293", "at_risk": "634", "events": "5", "survival": "0.5699798966632597", "ci_lower": "0.5417437768394767", "ci_upper": "0.5971674740123127"}, {"time_days": "294", "at_risk": "629", "events": "3", "survival": "0.5672613915917337", "ci_lower": "0.5389938614060057", "ci_upper": "0.5944928383614485"}, {"time_days": "295", "at_risk": "626", "events": "9", "survival": "0.559105876377156", "ci_lower": "0.5307505345132442", "ci_upper": "0.5864628543802692"}, {"time_days": "296", "at_risk": "617", "events": "3", "survival": "0.5563873713056301", "ci_lower": "0.5280048839739512", "ci_upper": "0.5837841794784328"}, {"time_days": "297", "at_risk": "614", "events": "5", "survival": "0.5518565295197536", "ci_lower": "0.5234311434543073", "ci_upper": "0.579317498370433"}, {"time_days": "298", "at_risk": "609", "events": "4", "survival": "0.5482318560910524", "ci_lower": "0.5197742499262867", "ci_upper": "0.5757421613998089"}, {"time_days": "299", "at_risk": "604", "events": "4", "survival": "0.544601181547403", "ci_lower": "0.5161127802947966", "ci_upper": "0.5721594955091417"}, {"time_days": "300", "at_risk": "599", "events": "3", "survival": "0.5418736297199536", "ci_lower": "0.5133630277274975", "ci_upper": "0.5694671192467826"}, {"time_days": "301", "at_risk": "596", "events": "4", "survival": "0.538236893950021", "ci_lower": "0.509698324167676", "ci_upper": "0.5658757330117424"}, {"time_days": "303", "at_risk": "592", "events": "2", "survival": "0.5364185260650547", "ci_lower": "0.507866670081151", "ci_upper": "0.5640793769027819"}, {"time_days": "315", "at_risk": "590", "events": "1", "survival": "0.5355093421225715", "ci_lower": "0.5069510170384601", "ci_upper": "0.563181033441298"}, {"time_days": "320", "at_risk": "589", "events": "2", "survival": "0.5336909742376053", "ci_lower": "0.5051200583684777", "ci_upper": "0.5613840161755369"}, {"time_days": "321", "at_risk": "587", "events": "2", "survival": "0.531872606352639", "ci_lower": "0.5032895621567348", "ci_upper": "0.5595865590648416"}, {"time_days": "325", "at_risk": "585", "events": "3", "survival": "0.5291450545251896", "ci_lower": "0.5005446830028821", "ci_upper": "0.556889550248273"}, {"time_days": "328", "at_risk": "582", "events": "1", "survival": "0.5282358705827064", "ci_lower": "0.4996299535631979", "ci_upper": "0.5559903281479727"}, {"time_days": "330", "at_risk": "581", "events": "1", "survival": "0.5273266866402232", "ci_lower": "0.49871533908717575", "ci_upper": "0.5550909966068979"}, {"time_days": "331", "at_risk": "580", "events": "1", "survival": "0.5264175026977401", "ci_lower": "0.4978008394718609", "ci_upper": "0.5541915557069963"}, {"time_days": "335", "at_risk": "579", "events": "2", "survival": "0.5245991348127738", "ci_lower": "0.4959721844192393", "ci_upper": "0.5523923461518039"}, {"time_days": "338", "at_risk": "577", "events": "1", "survival": "0.5236899508702906", "ci_lower": "0.49505802878371025", "ci_upper": "0.551492577653724"}, {"time_days": "346", "at_risk": "576", "events": "1", "survival": "0.5227807669278074", "ci_lower": "0.4941439876124309", "ci_upper": "0.5505927001112477"}, {"time_days": "348", "at_risk": "575", "events": "1", "survival": "0.5218715829853243", "ci_lower": "0.49323006081009624", "ci_upper": "0.5496927135996668"}, {"time_days": "350", "at_risk": "574", "events": "2", "survival": "0.5200532151003581", "ci_lower": "0.49140254993859084", "ci_upper": "0.5478924139637692"}, {"time_days": "355", "at_risk": "572", "events": "1", "survival": "0.5191440311578749", "ci_lower": "0.49048896568634337", "ci_upper": "0.5469921009834633"}, {"time_days": "360", "at_risk": "571", "events": "1", "survival": "0.5182348472153917", "ci_lower": "0.4895754954368755", "ci_upper": "0.5460916793220819"}], "exclusions": [{"reason": "included_in_original_cohort", "patient_count": "1099"}, {"reason": "12_month_lookforward_not_met", "patient_count": "230"}, {"reason": "prior_target_drug_use_in_washout", "patient_count": "141"}, {"reason": "no_continuous_12m_lookback", "patient_count": "30"}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('dashboard-data').textContent);
+const $ = id => document.getElementById(id);
+const fmt = n => Number(n).toLocaleString('en-US');
+const pct = n => `${Number(n).toFixed(2)}%`;
+function selectedScenario(){
+ const gap=$('gap').value, cohort=$('cohort').value;
+ return DATA.sensitivity.find(x=>Number(x.gap_days)===Number(gap)&&x.lookforward_rule===cohort);
+}
+function renderMetrics(){
+ const s=selectedScenario();
+ $('persistence').textContent=pct(s.persistence_pct);
+ $('cohortN').textContent=fmt(s.cohort_n);
+ $('persistentN').textContent=fmt(s.persistent_n);
+ const baseline = Number($('gap').value)===60 && $('cohort').value==='12_months';
+ const ci=DATA.summary.persistent_6m_wilson_95ci_pct;
+ $('ci').textContent=baseline?`95% Wilson CI: ${Number(ci[0]).toFixed(2)}%–${Number(ci[1]).toFixed(2)}%`:'95% CI not calculated for this sensitivity scenario';
+ $('scenarioLabel').textContent=`Selected: ${$('gap').value}-day gap · ${$('cohort').value==='12_months'?'12-month look-forward':'six-month observable'}`;
+}
+function svgEl(tag,attrs={},txt=''){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(txt)e.textContent=txt;return e}
+function renderKM(){
+ const svg=$('kmChart');svg.innerHTML='';
+ const W=720,H=330,L=58,R=18,T=18,B=45,iw=W-L-R,ih=H-T-B;
+ const rows=DATA.km.map(x=>({t:+x.time_days,s:+x.survival,lo:+x.ci_lower,hi:+x.ci_upper}));
+ const maxT=Math.max(365,...rows.map(x=>x.t));
+ const X=t=>L+(t/maxT)*iw, Y=v=>T+(1-v)*ih;
+ [0,.2,.4,.6,.8,1].forEach(v=>{
+  svg.append(svgEl('line',{x1:L,y1:Y(v),x2:W-R,y2:Y(v),stroke:'#e5ebf2'}));
+  svg.append(svgEl('text',{x:L-10,y:Y(v)+4,'text-anchor':'end',fill:'#66758a','font-size':11},`${Math.round(v*100)}%`));
+ });
+ [0,90,180,270,365,450].filter(t=>t<=maxT).forEach(t=>{
+  svg.append(svgEl('line',{x1:X(t),y1:T,x2:X(t),y2:H-B,stroke:'#f0f3f7'}));
+  svg.append(svgEl('text',{x:X(t),y:H-17,'text-anchor':'middle',fill:'#66758a','font-size':11},`${t}d`));
+ });
+ let d=`M ${X(0)} ${Y(1)}`;
+ rows.forEach(r=>{d+=` H ${X(r.t)} V ${Y(r.s)}`});
+ d+=` H ${X(maxT)}`;
+ svg.append(svgEl('path',{d,fill:'none',stroke:'#16866f','stroke-width':3,'stroke-linejoin':'round'}));
+ const refX=X(183), refY=Y(.68);
+ svg.append(svgEl('line',{x1:L,y1:refY,x2:W-R,y2:refY,stroke:'#b7791f','stroke-width':1.5,'stroke-dasharray':'6 5'}));
+ svg.append(svgEl('line',{x1:refX,y1:T,x2:refX,y2:H-B,stroke:'#b7791f','stroke-width':1,'stroke-dasharray':'3 5'}));
+ svg.append(svgEl('text',{x:Math.min(refX+7,W-150),y:refY-8,fill:'#946115','font-size':11},'Historical 68% reference'));
+ svg.append(svgEl('text',{x:W/2,y:H-2,'text-anchor':'middle',fill:'#66758a','font-size':12},'Days since index date'));
+ const six=rows.filter(r=>r.t<=183).slice(-1)[0];
+ $('kmSummary').textContent=`At-risk/event table contains ${rows.length} distinct event times. Custom KM estimate at 183 days: ${pct(100*Number(DATA.summary.km_survival_at_183_days))}. Lifelines comparison status: ${DATA.summary.lifelines_cross_validation.status}.`;
+}
+function renderFunnel(){
+ const box=$('funnel');box.innerHTML='';
+ const rows=DATA.exclusions;
+ const max=Math.max(...rows.map(x=>+x.patient_count));
+ rows.forEach(r=>{
+  const n=+r.patient_count, wrap=document.createElement('div');wrap.className='funnel-row';
+  const left=document.createElement('div'), label=document.createElement('div');
+  label.textContent=r.reason.replaceAll('_',' ');label.style.fontSize='12px';label.style.textTransform='capitalize';
+  const bg=document.createElement('div');bg.className='barbg';
+  const fill=document.createElement('div');fill.className='barfill';fill.style.width=(100*n/max)+'%';bg.append(fill);
+  left.append(label,bg);const count=document.createElement('b');count.textContent=fmt(n);count.style.textAlign='right';
+  wrap.append(left,count);box.append(wrap);
+ });
+}
+function renderSensitivity(){
+ const rows=DATA.sensitivity;
+ const svg=$('sensitivityChart');svg.innerHTML='';
+ const W=680,H=290,L=48,R=18,T=18,B=42,iw=W-L-R,ih=H-T-B;
+ const X=i=>L+i*iw/5, Y=v=>T+(100-v)*ih/100;
+ [0,20,40,60,80,100].forEach(v=>{
+  svg.append(svgEl('line',{x1:L,y1:Y(v),x2:W-R,y2:Y(v),stroke:'#e7edf4'}));
+  svg.append(svgEl('text',{x:L-8,y:Y(v)+4,'text-anchor':'end',fill:'#66758a','font-size':10},`${v}%`));
+ });
+ const cats=['30d','60d','90d'];
+ ['12_months','six_month_observable'].forEach((basis,j)=>{
+  const vals=cats.map(g=>rows.find(x=>+x.gap_days===parseInt(g)&&x.lookforward_rule===basis));
+  let d=vals.map((v,i)=>`${i?'L':'M'} ${X(i*2+ j*.45)} ${Y(+v.persistence_pct)}`).join(' ');
+  svg.append(svgEl('path',{d,fill:'none',stroke:j?'#315fba':'#16866f','stroke-width':2.5}));
+  vals.forEach((v,i)=>{
+   const x=X(i*2+j*.45),y=Y(+v.persistence_pct);
+   svg.append(svgEl('circle',{cx:x,cy:y,r:5,fill:j?'#315fba':'#16866f'}));
+  });
+ });
+ cats.forEach((g,i)=>svg.append(svgEl('text',{x:X(i*2+.2),y:H-18,'text-anchor':'middle',fill:'#66758a','font-size':11},g)));
+ svg.append(svgEl('text',{x:W/2,y:H-2,'text-anchor':'middle',fill:'#66758a','font-size':11},'Allowed refill gap'));
+ const table=document.createElement('table');
+ table.innerHTML='<thead><tr><th>Gap</th><th>Original cohort</th><th>Six-month observable</th></tr></thead>';
+ const body=document.createElement('tbody');
+ cats.forEach(g=>{
+  const a=rows.find(x=>+x.gap_days===parseInt(g)&&x.lookforward_rule==='12_months');
+  const b=rows.find(x=>+x.gap_days===parseInt(g)&&x.lookforward_rule==='six_month_observable');
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>${g}</td><td>${pct(a.persistence_pct)} (${fmt(a.cohort_n)})</td><td>${pct(b.persistence_pct)} (${fmt(b.cohort_n)})</td>`;
+  body.append(tr);
+ });
+ table.append(body);$('sensitivityTable').replaceChildren(table);
+}
+function renderInterpretation(){
+ const s=selectedScenario(), base=DATA.sensitivity.find(x=>+x.gap_days===60&&x.lookforward_rule==='12_months');
+ const diff=Number(s.persistence_pct)-Number(base.persistence_pct);
+ const items=[
+  `Selected scenario changes six-month persistence by ${diff>=0?'+':''}${diff.toFixed(2)} percentage points versus the original 60-day / 12-month baseline.`,
+  `The original cohort includes ${fmt(DATA.summary.original_cohort_n)} patients from ${fmt(DATA.summary.candidate_patients)} synthetic candidates.`,
+  `The 95% Wilson interval shown on the baseline is a fixed-horizon binomial interval; it is not a confidence interval for every sensitivity scenario.`,
+  `The survival cohort has ${fmt(DATA.summary.observed_discontinuations)} observed discontinuation events and ${fmt(DATA.summary.censored_n)} censored observations.`
+ ];
+ $('interpretation').innerHTML='';items.forEach(t=>{const li=document.createElement('li');li.textContent=t;$('interpretation').append(li)});
+}
+function renderAssumptions(){
+ const c=DATA.summary.config;
+ const pairs=[
+ ['Index date','First observed paid target-drug fill after 12-month washout'],
+ ['Look-back',`${c.lookback_months} calendar months continuous enrolment`],
+ ['Look-forward',`${c.lookforward_months} calendar months continuous enrolment for original cohort`],
+ ['Allowed refill gap',`${c.allowed_gap_days} days; >60 days is discontinuation in baseline`],
+ ['Six-month endpoint',`${c.persistence_months} calendar-month anniversary`],
+ ['Stockpiling',`Unused supply carried forward, capped at ${c.stockpiling_cap_days} days`],
+ ['Drug definition',c.drug_id],
+ ['Claims included','Paid claims only; rejected/reversed excluded'],
+ ['Restart','Does not restore persistence in original episode'],
+ ['Insurance loss','Censored in survival cohort; excluded from original cohort if look-forward fails']
+ ];
+ $('assumptions').innerHTML=pairs.map(([a,b])=>`<div class="assumption"><b>${a}</b><span>${b}</span></div>`).join('');
+}
+function render(){renderMetrics();renderKM();renderFunnel();renderSensitivity();renderInterpretation();renderAssumptions()}
+$('gap').addEventListener('change',render);$('cohort').addEventListener('change',render);
+$('reset').addEventListener('click',()=>{$('gap').value='60';$('cohort').value='12_months';render()});
+render();
+</script>
+</body></html>
